@@ -98,7 +98,6 @@ function render() {
 #条件不成立时渲染
 function render() {
   return condition || <span>Rendered when `falsey`</span>
-}
 
 #单行三元运算符
 function render() {
@@ -196,24 +195,24 @@ function render() {
 </ul>)
 Function As Children
 
-//然而并不常用，这种函数逻辑应该在return之前定义好
+#然而并不常用，这种函数逻辑应该在return之前定义好
 <div>{() => { return "hello world!" }()}</div>
 Render Callback
 
 这是一个使用渲染回调的组件，这不是有用的，但这是一个很容易的例子。
 
-//把children设成一个函数
+#把children设成一个函数
 const Width = ({ children }) => children(500)
 
-//调用
+#调用
 (<Width>
   {width => <div>window is {width}</div>}
 </Width>)
 
-//输出结果
+#输出结果
 <div>window is 500</div>
 
-//一个更复杂的例子
+#一个更复杂的例子
 class WindowWidth extends React.Component {
   constructor() {
     super();
@@ -222,7 +221,7 @@ class WindowWidth extends React.Component {
     };
   }
 
-  //没想到this.setState有第二参数，并且是函数
+  #没想到this.setState有第二参数，并且是函数
   componentDidMount() {
     this.setState({
       width: window.innerWidth
@@ -236,7 +235,7 @@ class WindowWidth extends React.Component {
   }
 }
 
-//调用
+#调用
 (<WindowWidth>
   {width => <div>window is {width}</div>}
 </WindowWidth>)
@@ -513,17 +512,17 @@ export default Enhance(MyComponent);
 
 **状态提升是指把子组件的数据传到父组件，一般通过函数来交流。**
 ```
-//传递一个函数到子组件
+#传递一个函数到子组件
 class NameContainer extends React.Component {
   render() {
     return <Name onChange={newName => alert(newName)}/>
   }
 }
 
-//在子组件触发该函数，父组件会反映出来，这是最常见的方式。
+#在子组件触发该函数，父组件会反映出来，这是最常见的方式。
 const Name = ({ onChange }) => <input onChange={e => onChange(e.target.value)}/>
 
-//下面就是子组件通过函数传递数据到父组件的例子
+#下面就是子组件通过函数传递数据到父组件的例子
 class NameContainer extends React.Component {
   constructor() {
     super()
@@ -539,7 +538,7 @@ class NameContainer extends React.Component {
 
 **受控 – 不受控组件，这个概念有点抽象，主要讨论from表单里的input元素是个不可控组件，大概了解一下即可。**
 ```
-//当这样写的时候，input只能显示最初获取的值，且无法改变
+#当这样写的时候，input只能显示最初获取的值，且无法改变
 class UncontrolledNameInput extends React.Component {
   constructor() {
     super();
@@ -551,8 +550,8 @@ class UncontrolledNameInput extends React.Component {
   }
 };
 
-//这样可以做到双向绑定，让input变得可控
-//只要知道一点，当你按下键盘的时候，实际上是先改变this.state.name，才会间接引起input的值变化，并非直接改变。
+#这样可以做到双向绑定，让input变得可控
+#只要知道一点，当你按下键盘的时候，实际上是先改变this.state.name，才会间接引起input的值变化，并非直接改变。
 class ControlledNameInput extends Component {
   constructor() {
     super();
@@ -573,17 +572,17 @@ class ControlledNameInput extends Component {
 
 **分析JSX中的条件渲染**
 ```
-//单条件不建议写法
+#单条件不建议写法
 const sampleComponent = () => {
   return isTrue ? <p>True!</p> : <none/>
 };
 
-//单条件建议写法
+#单条件建议写法
 const sampleComponent = () => {
   return isTrue && <p>True!</p>
 };
 
-//多条件不建议写法
+#多条件不建议写法
 const sampleComponent = () => {
   return (
     <div>
@@ -599,7 +598,7 @@ const sampleComponent = () => {
   )
 };
 
-//多条件建议写法
+#多条件建议写法
 const sampleComponent = () => {
   return (
     <div>
